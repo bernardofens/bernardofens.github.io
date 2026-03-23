@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bernardo Fensterseifer — iOS Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0b;
+    --bg2: #111113;
+    --bg3: #18181c;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #f0efe8;
+    --muted: #8a8a8f;
+    --accent: #e8e0c8;
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.08);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2.5rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s ease forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s ease forwards;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s ease forwards;
+  }
+
+  .badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 12px;
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    background: var(--bg3);
+  }
+
+  .badge.gold {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.65s ease forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #0a0a0b;
+    border: 1px solid var(--gold);
+  }
+
+  .btn-primary:hover {
+    background: #d4b05a;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-1px);
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 1s ease forwards;
+  }
+
+  .scroll-hint::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--muted));
+    animation: scrollLine 2s ease infinite;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 7rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text);
+    margin-top: 0.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat-box {
+    background: var(--bg2);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.2s;
+  }
+
+  .stat-box:hover { background: var(--bg3); }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-block {
+    background: var(--bg2);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.2s;
+  }
+
+  .skill-block:hover { background: var(--bg3); }
+
+  .skill-block-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .skill-list {
+    list-style: none;
+  }
+
+  .skill-list li {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skill-list li::before {
+    content: '–';
+    color: var(--border2);
+    font-family: var(--mono);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--bg2);
+    padding: 2.25rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover { background: var(--bg3); }
+  .project-card:hover::before { transform: scaleY(1); }
+
+  .project-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--border2);
+    padding-top: 4px;
+    min-width: 24px;
+  }
+
+  .project-info h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+
+  .project-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 600px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .project-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    padding-top: 4px;
+  }
+
+  .appstore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    padding: 6px 12px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .appstore-btn:hover {
+    background: var(--gold-dim);
+  }
+
+  .wip-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+  }
+
+  .highlight-card {
+    background: var(--gold-dim);
+    border-left: 2px solid var(--gold);
+  }
+
+  .highlight-card:hover { background: rgba(201,168,76,0.2); }
+
+  /* ── EXPERIENCE ── */
+  .exp-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 180px; height: 180px;
+    background: var(--gold-glow);
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .exp-org {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-role {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    align-self: flex-start;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .exp-bullets li {
+    font-size: 14px;
+    color: var(--muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.7;
+  }
+
+  .exp-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .exp-bullets li strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── AWARDS ── */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .award-card {
+    background: var(--bg2);
+    padding: 2rem 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .award-card:hover { background: var(--bg3); }
+
+  .award-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .award-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .award-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .award-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    text-decoration: none;
+    margin-top: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  .award-link:hover { text-decoration: underline; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    text-align: center;
+    padding: 7rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-section .section-label {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .contact-section .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-section p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .contact-item span:first-child {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .contact-item a, .contact-item span:last-child {
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .contact-item a:hover { color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    section, .contact-section { padding: 4rem 1.25rem; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .project-card { grid-template-columns: auto 1fr; }
+    .project-action { flex-direction: row; grid-column: 1 / -1; grid-row: 2; }
+    footer { flex-direction: column; text-align: center; }
+    .scroll-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">bernardo.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-tag">iOS Developer · Porto Alegre, Brazil</p>
+  <h1>Bernardo<br><em>Fensterseifer</em></h1>
+  <p class="hero-sub">I build native Apple apps — from iPhone to Vision Pro. Three apps live on the App Store. Two years at Apple Developer Academy. Always shipping something new.</p>
+  <div class="hero-badges">
+    <span class="badge gold">★ Startup Garage Top 10 Finalist</span>
+    <span class="badge">3 Apps on the App Store</span>
+    <span class="badge">Swift · SwiftUI · UIKit</span>
+    <span class="badge">PUCRS — Computer Science</span>
+    <span class="badge">English Fluent</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">See my work</a>
+    <a href="mailto:bernardogarciafen@gmail.com" class="btn btn-ghost">Get in touch</a>
+    <a href="https://github.com/bernardofens" target="_blank" class="btn btn-ghost">GitHub</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow reveal">
+    <span class="section-label">01 — About</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>Computer Science student at PUCRS</strong> and iOS developer at the <strong>Apple Developer Academy</strong>, where I've been building real products inside the Apple ecosystem for over two years.</p>
+      <p>My work spans the full Apple platform — iPhone, iPad, macOS, watchOS and visionOS — using Swift, SwiftUI, UIKit and SpriteKit. I care about <strong>design, craft and shipping</strong>.</p>
+      <p>I work in multidisciplinary teams with <strong>SCRUM methodology</strong>, handle UX/UI design in Figma, do QA testing via AppStore Connect and regularly pitch products to audiences ranging from developers to investors.</p>
+      <p>Beyond code, I'm a creative — the art, music and code in Shiro. are all mine. I like to understand the full product, not just my slice of it.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Apps on the App Store</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years at Apple Developer Academy</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">Top 10</div>
+        <div class="stat-label">Startup Garage Finalist</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Apple Platforms covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="padding-top: 0;">
+  <div class="section-eyebrow reveal">
+    <span class="section-label">02 — Skills</span>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-block">
+      <div class="skill-block-title">Apple Ecosystem</div>
+      <ul class="skill-list">
+        <li>Swift</li>
+        <li>SwiftUI</li>
+        <li>UIKit</li>
+        <li>SpriteKit</li>
+        <li>Game Center</li>
+        <li>AppStore Connect</li>
+        <li>Xcode</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Platforms</div>
+      <ul class="skill-list">
+        <li>iOS / iPadOS</li>
+        <li>macOS</li>
+        <li>watchOS</li>
+        <li>visionOS</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Design & Web</div>
+      <ul class="skill-list">
+        <li>Figma</li>
+        <li>UX / UI Design</li>
+        <li>Human Interface Guidelines</li>
+        <li>HTML · CSS</li>
+        <li>Canva</li>
+      </ul>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title">Process</div>
+      <ul class="skill-list">
+        <li>SCRUM / Agile</li>
+        <li>QA & Testing</li>
+        <li>Git · GitHub</li>
+        <li>Java</li>
+        <li>Technical Pitching</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-eyebrow reveal">
+    <span class="section-label">03 — Projects</span>
+  </div>
+  <h2 class="section-title reveal">Things I've shipped</h2>
+  <br><br>
+
+  <div class="projects-list reveal">
+
+    <!-- CLAIRFY -->
+    <a class="project-card highlight-card" href="https://apps.apple.com/br/app/clairfy/id6747406139" target="_blank">
+      <span class="project-num">01</span>
+      <div class="project-info">
+        <div class="project-category">Health · iOS</div>
+        <h3>Clairfy</h3>
+        <p class="project-desc">Summarizes medical consultations for both doctors and patients — reducing miscommunication and making healthcare information accessible. Featured on the BioHub/Tecnopuc podcast and selected as a <strong style="color: var(--gold)">Top 10 finalist at Startup Garage</strong>, where I pitched to investors and experts.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">AppStore Connect</span>
+          <span class="project-tag">Startup Garage</span>
+          <span class="project-tag">BioHub Podcast</span>
+        </div>
+      </div>
+      <div class="project-action">
+        <span class="appstore-btn">App Store ↗</span>
+        <a href="https://www.youtube.com/watch?v=reNIX0ADKS8&t=71s" target="_blank" onclick="event.stopPropagation()" class="appstore-btn" style="color: var(--muted); border-color: var(--border);">Podcast ↗</a>
+      </div>
+    </a>
+
+    <!-- ZINER -->
+    <a class="project-card" href="https://apps.apple.com/br/app/ziner/id6755310040" target="_blank">
+      <span class="project-num">02</span>
+      <div class="project-info">
+        <div class="project-category">Creativity · iOS</div>
+        <h3>Ziner</h3>
+        <p class="project-desc">A mobile zine editor — create, edit, share and export your own 8-page self-published magazine as a print-ready PDF. Built around a focused, tactile UX designed for creative expression on the go.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">PDFKit</span>
+          <span class="project-tag">UX Design</span>
+        </div>
+      </div>
+      <div class="project-action">
+        <span class="appstore-btn">App Store ↗</span>
+      </div>
+    </a>
+
+    <!-- SHIRO -->
+    <a class="project-card" href="https://apps.apple.com/br/app/shiro/id6752502968" target="_blank">
+      <span class="project-num">03</span>
+      <div class="project-info">
+        <div class="project-category">Game · iOS</div>
+        <h3>Shiro.</h3>
+        <p class="project-desc">A vertical climbing game with a retro Game Boy aesthetic. Every line of code, every pixel of art and every note of music was made by me — a fully solo creative endeavour. Features Game Center integration with local and global leaderboards.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SpriteKit</span>
+          <span class="project-tag">Game Center</span>
+          <span class="project-tag">Pixel Art</span>
+          <span class="project-tag">Original Music</span>
+        </div>
+      </div>
+      <div class="project-action">
+        <span class="appstore-btn">App Store ↗</span>
+      </div>
+    </a>
+
+    <!-- ZENITH -->
+    <div class="project-card" style="cursor: default;">
+      <span class="project-num">04</span>
+      <div class="project-info">
+        <div class="project-category">Game · iOS — In Development</div>
+        <h3>Zenith</h3>
+        <p class="project-desc">A top-down pixel art game with wave-based progression. Currently in active development — App Store launch coming soon.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SpriteKit</span>
+          <span class="project-tag">Pixel Art</span>
+        </div>
+      </div>
+      <div class="project-action">
+        <span class="wip-tag">In progress</span>
+      </div>
+    </div>
+
+    <!-- PURRCHASE -->
+    <div class="project-card" style="cursor: default;">
+      <span class="project-num">05</span>
+      <div class="project-info">
+        <div class="project-category">Productivity · iOS — First App</div>
+        <h3>Purrchase</h3>
+        <p class="project-desc">My first iOS app — a playful shopping assistant built with UIKit. Not on the App Store, but the project where I learned the fundamentals of iOS development and UIKit layout.</p>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">UIKit</span>
+        </div>
+      </div>
+      <div class="project-action">
+        <a href="https://github.com/bernardofens" target="_blank" class="appstore-btn">GitHub ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow reveal">
+    <span class="section-label">04 — Experience</span>
+  </div>
+  <h2 class="section-title reveal">Where I've worked</h2>
+  <br><br>
+  <div class="exp-card reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-org">Apple Developer Academy · PUCRS</div>
+        <div class="exp-role">iOS Developer Intern</div>
+      </div>
+      <div class="exp-period">2023 — Present · 2+ years</div>
+    </div>
+    <ul class="exp-bullets">
+      <li>Build native apps for the <strong>full Apple ecosystem</strong> — iPhone, iPad, macOS, Apple Watch and Apple Vision Pro — using Swift, SwiftUI, UIKit and SpriteKit.</li>
+      <li>Published <strong>3 apps on the App Store</strong> with real users and international distribution.</li>
+      <li>Work in <strong>SCRUM teams</strong> through sprints, retrospectives, code reviews and continuous delivery cycles.</li>
+      <li>Perform <strong>QA and testing</strong> before every release using AppStore Connect and Apple's testing frameworks.</li>
+      <li>Design interfaces in <strong>Figma</strong>, following Apple's Human Interface Guidelines to build intuitive, accessible UX.</li>
+      <li>Regularly <strong>pitch products and present demos</strong> to technical and non-technical audiences — including investors at Startup Garage.</li>
+      <li>Evaluated <strong>individually and collectively</strong> on each challenge, developing strong autonomy, ownership and product thinking.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" style="padding-top: 0;">
+  <div class="section-eyebrow reveal">
+    <span class="section-label">05 — Recognition</span>
+  </div>
+  <div class="awards-grid reveal">
+    <div class="award-card">
+      <div class="award-icon">🏆</div>
+      <div class="award-title">Startup Garage — Top 10 Finalist</div>
+      <p class="award-desc">Selected among the top 10 startups out of all participants. Pitched Clairfy in the final round to a panel of investors, mentors and industry experts.</p>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🎙️</div>
+      <div class="award-title">BioHub / Tecnopuc Podcast</div>
+      <p class="award-desc">Featured on the Tecnopuc BioHub podcast presenting Clairfy — communicating the product vision, impact and technical approach to a broad audience.</p>
+      <a href="https://www.youtube.com/watch?v=reNIX0ADKS8&t=71s" target="_blank" class="award-link">Watch on YouTube ↗</a>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🍎</div>
+      <div class="award-title">Apple Developer Academy · 2 Years</div>
+      <p class="award-desc">Continuously selected and evaluated across multiple challenges at one of Apple's developer training programs, covering the full Apple ecosystem.</p>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">📱</div>
+      <div class="award-title">3 Apps on the App Store</div>
+      <p class="award-desc">Shipped three production apps — Clairfy, Ziner and Shiro. — available internationally on the Apple App Store, with real users.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <span class="section-label reveal">06 — Contact</span>
+  <h2 class="section-title reveal">Let's build<br><em>something together</em></h2>
+  <p class="reveal">Open to internship opportunities, collaborations and interesting conversations. Based in Porto Alegre — working remotely.</p>
+  <div class="contact-links reveal">
+    <a href="mailto:bernardogarciafen@gmail.com" class="btn btn-primary">Send an email</a>
+    <a href="https://linkedin.com/in/bernardo-fensterseifer-22b973318" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    <a href="https://github.com/bernardofens" target="_blank" class="btn btn-ghost">GitHub</a>
+  </div>
+  <div class="contact-info reveal">
+    <div class="contact-item">
+      <span>Email</span>
+      <a href="mailto:bernardogarciafen@gmail.com">bernardogarciafen@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <span>Phone</span>
+      <span>+55 (51) 99412-3399</span>
+    </div>
+    <div class="contact-item">
+      <span>Location</span>
+      <span>Porto Alegre, RS — Brazil</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Bernardo Garcia Fensterseifer</p>
+  <p>Built with HTML · Hosted on GitHub Pages</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
