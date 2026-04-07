@@ -216,26 +216,24 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
   section{padding:4rem 1.25rem}
   .hero{grid-template-columns:1fr;padding:7rem 1.25rem 4rem;gap:2rem}
   .hero-avatar {
-  width: 220px;
-  height: 220px;
-  background: transparent;
-  flex-shrink: 0;
-  opacity: 0;
-  animation: fadeIn 0.8s 0.3s ease forwards;
-  image-rendering: pixelated;   /* keep pixelated if needed, else remove */
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-  /* Remove any border, border-radius, overflow */
-  border: none;
-  border-radius: 0;
-  overflow: visible;
+    width: 220px;
+    height: auto;
+
+    /* REMOVE EVERYTHING THAT MAKES IT A CIRCLE */
+    border-radius: 0;
+    overflow: visible;
+    background: none;
+    border: none;
+
+    /* KEEP IT CLEAN */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* NICE POLISH */
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
   }
 
-  .hero-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;   /* or cover, depending on your image */
-    display: block;
-  }
   .about-grid{grid-template-columns:1fr;gap:2.5rem}
   .beyond-grid{grid-template-columns:1fr}
   .project-card{grid-template-columns:1fr;min-height:auto}
