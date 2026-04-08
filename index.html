@@ -363,24 +363,28 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
 
 <!-- NAV -->
 <nav role="navigation" aria-label="Main navigation">
-  <a class="nav-logo" href="#" aria-label="Bernardo Fensterseifer">bernardo.dev</a>
-  <div class="nav-right">
-    <ul class="nav-links" role="list">
-      <li><a href="#about" data-i18n="nav_about">About</a></li>
-      <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
-      <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
-      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-    </ul>
-    <div class="lang-switcher" aria-label="Language switcher">
-      <button class="lang-btn" onclick="setLang('pt')" data-l="pt">PT</button>
-      <button class="lang-btn" onclick="setLang('en')" data-l="en">EN</button>
-      <button class="lang-btn" onclick="setLang('ja')" data-l="ja">JA</button>
-    </div>
-    <button id="themeToggle" class="theme-toggle">
-        ☀︎
+    <a class="nav-logo" href="#" aria-label="Bernardo Fensterseifer">bernardo.dev</a>
+  
+    <div class="nav-right">
+      <ul class="nav-links" role="list">
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
+        <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+        <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+  
+      <div class="lang-switcher" aria-label="Language switcher">
+        <button class="lang-btn" onclick="setLang('pt')" data-l="pt">PT</button>
+        <button class="lang-btn" onclick="setLang('en')" data-l="en">EN</button>
+        <button class="lang-btn" onclick="setLang('ja')" data-l="ja">JA</button>
+      </div>
+  
+      <!-- Theme Toggle -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        ☾
       </button>
-  </div>
-</nav>
+    </div>
+  </nav>
 
 <!-- HERO -->
 <main id="main">
@@ -1130,23 +1134,46 @@ window.addEventListener('DOMContentLoaded', () => {
 <script>
     const toggleBtn = document.getElementById("themeToggle");
     
-    // carregar preferência salva
-    if(localStorage.getItem("theme") === "dark"){
-      document.body.classList.add("dark");
-      toggleBtn.innerText = "Light mode";
+    // função pra atualizar ícone
+    function updateThemeIcon() {
+      if (document.body.classList.contains("dark")) {
+        toggleBtn.innerText = "☀︎"; // mostra sol quando está no dark
+      } else {
+        toggleBtn.innerText = "☾"; // mostra lua quando está no light
+      }
     }
+    
+    // carregar preferência salva
+    const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    } else if (savedTheme === "light") {
+      document.body.classList.remove("dark");
+    }
+    
+    // (opcional PRO) detectar sistema se não tiver preferência salva
+    if (!savedTheme) {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (prefersDark) {
+        document.body.classList.add("dark");
+      }
+    }
+    
+    // atualizar ícone inicial
+    updateThemeIcon();
     
     // toggle
     toggleBtn.addEventListener("click", () => {
       document.body.classList.toggle("dark");
     
-      if(document.body.classList.contains("dark")){
+      if (document.body.classList.contains("dark")) {
         localStorage.setItem("theme", "dark");
-        toggleBtn.innerText = "☀︎";
       } else {
         localStorage.setItem("theme", "light");
-        toggleBtn.innerText = "☾";
       }
+    
+      updateThemeIcon();
     });
     </script>
 </body>
