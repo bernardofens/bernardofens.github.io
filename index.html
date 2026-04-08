@@ -11,7 +11,8 @@
 /* ── RESET & ROOT ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#fdfaf7;
+
+  /* --bg:#fdfaf7;
   --bg2:#ffffff;
   --bg3:#f6f3ef;
   --bg4:#ece7e1;
@@ -20,9 +21,25 @@
   --muted2:#a8a39b;
   --border:rgba(0,0,0,0.06);
   --border2:rgba(0,0,0,0.12);
-  /* nova vibe */
+  --accent:#7C7961;
+  --accent-soft:#FDDAC2; */
+
+  /* LIGHT (default) */
+  --bg:#fdfaf7;
+  --bg2:#ffffff;
+  --bg3:#f6f3ef;
+  --bg4:#ece7e1;
+
+  --text:#2e2e2e;
+  --muted:#7c7961;
+  --muted2:#a8a39b;
+
+  --border:rgba(0,0,0,0.06);
+  --border2:rgba(0,0,0,0.12);
+
   --accent:#7C7961;
   --accent-soft:#FDDAC2;
+
   --serif:'Vollkorn', serif;
   --sans:'IM Fell English', serif;
   --mono:'DM Mono',monospace;
@@ -33,6 +50,24 @@
   --zenith:#3B6D11;
   --accent:var(--clairfy);
 }
+
+body.dark{
+  --bg:#1c1c1c;
+  --bg2:#242424;
+  --bg3:#2b2b2b;
+  --bg4:#333333;
+
+  --text:#f5f5f5;
+  --muted:#b5b1a3;
+  --muted2:#8c877b;
+
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.12);
+
+  --accent:#FDDAC2;
+  --accent-soft:#7C7961;
+}
+
 .btn-primary{
   background:#7C7961;
   color:white;
@@ -60,6 +95,29 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:
 .about-text p{
   font-size:1.05rem;
 }
+
+.theme-toggle{
+  position:fixed;
+  top:24px;
+  right:24px;
+
+  padding:10px 16px;
+  border-radius:999px;
+
+  border:1px solid var(--border2);
+  background:var(--bg2);
+  color:var(--text);
+
+  font-size:0.9rem;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+
+.theme-toggle:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
 /* ── SKIP LINK ── */
 .skip-link{position:absolute;top:-100px;left:1rem;background:var(--text);color:var(--bg);padding:.5rem 1rem;border-radius:4px;font-size:13px;z-index:9999;transition:top .2s}
 .skip-link:focus{top:1rem}
@@ -288,6 +346,9 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
       <button class="lang-btn" onclick="setLang('en')" data-l="en">EN</button>
       <button class="lang-btn" onclick="setLang('ja')" data-l="ja">JA</button>
     </div>
+    <button id="themeToggle" class="theme-toggle">
+        Dark mode
+    </button>
   </div>
 </nav>
 
@@ -760,6 +821,14 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
 </footer>
 
 <script>
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+if(!localStorage.getItem("theme")){
+  if(prefersDark){
+    document.body.classList.add("dark");
+    toggleBtn.innerText = "Light mode";
+  }
+}
 // ── I18N ──
 const translations = {
   pt: {
@@ -1027,5 +1096,28 @@ window.addEventListener('DOMContentLoaded', () => {
       avatarEl.src = avatars[currentAvatar];
     }, 2000); // troca a cada 2s
 </script>
+
+<script>
+    const toggleBtn = document.getElementById("themeToggle");
+    
+    // carregar preferência salva
+    if(localStorage.getItem("theme") === "dark"){
+      document.body.classList.add("dark");
+      toggleBtn.innerText = "Light mode";
+    }
+    
+    // toggle
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    
+      if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme", "dark");
+        toggleBtn.innerText = "Light mode";
+      } else {
+        localStorage.setItem("theme", "light");
+        toggleBtn.innerText = "Dark mode";
+      }
+    });
+    </script>
 </body>
 </html>
