@@ -6,22 +6,25 @@
 <meta name="description" content="Bernardo Fensterseifer — iOS Developer, Porto Alegre">
 <title>Bernardo Fensterseifer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;500;600&family=IM+Fell+English&display=swap" rel="stylesheet">
 <style>
 /* ── RESET & ROOT ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0c0c0e;
-  --bg2:#111115;
-  --bg3:#17171d;
-  --bg4:#1e1e26;
-  --border:rgba(255,255,255,0.06);
-  --border2:rgba(255,255,255,0.12);
-  --text:#ede9e0;
-  --muted:#6e6e7a;
-  --muted2:#9999a8;
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Syne',sans-serif;
+  --bg:#fdfaf7;
+  --bg2:#ffffff;
+  --bg3:#f6f3ef;
+  --bg4:#ece7e1;
+  --text:#2e2e2e;
+  --muted:#7c7961;
+  --muted2:#a8a39b;
+  --border:rgba(0,0,0,0.06);
+  --border2:rgba(0,0,0,0.12);
+  /* nova vibe */
+  --accent:#7C7961;
+  --accent-soft:#FDDAC2;
+  --serif:'Vollkorn', serif;
+  --sans:'IM Fell English', serif;
   --mono:'DM Mono',monospace;
   /* project accent colors */
   --clairfy:#1a9db8;
@@ -30,9 +33,33 @@
   --zenith:#3B6D11;
   --accent:var(--clairfy);
 }
-html{scroll-behavior:smooth;font-size:16px}
+.btn-primary{
+  background:#7C7961;
+  color:white;
+}
+
+.btn-primary:hover{
+  background:#6b6854;
+}
+
+.btn-ghost:hover{
+  border-color:#7C7961;
+  color:#7C7961;
+}
+html{scroll-behavior:smooth;font-size:18px}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;overflow-x:hidden}
 
+.hero-desc{
+  font-size:1.1rem;
+}
+
+.project-tagline{
+  font-size:1rem;
+}
+
+.about-text p{
+  font-size:1.05rem;
+}
 /* ── SKIP LINK ── */
 .skip-link{position:absolute;top:-100px;left:1rem;background:var(--text);color:var(--bg);padding:.5rem 1rem;border-radius:4px;font-size:13px;z-index:9999;transition:top .2s}
 .skip-link:focus{top:1rem}
@@ -71,8 +98,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .btn-ghost:hover{border-color:var(--text);transform:translateY(-1px)}
 /* Avatar modificado: sem borda arredondada, fundo transparente, filtro de sombra */
 .hero-avatar{
-  width:220px;
-  height:220px;
+  width:320px;
+  height:320px;
   border:none;
   background:transparent;
   flex-shrink:0;
@@ -285,7 +312,7 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
     </div>
   </div>
   <div class="hero-avatar" aria-hidden="true">
-    <img src="/Assets/profileImages/face2.png" alt="Bernardo pixel avatar" loading="lazy">
+    <img id="avatar" src="/Assets/profileImages/face1.png" alt="Bernardo pixel avatar" loading="lazy">
   </div>
   <div class="scroll-hint" aria-hidden="true"><span data-i18n="scroll">Scroll</span></div>
 </div>
@@ -325,14 +352,14 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
   <div class="beyond-grid reveal">
     <div class="beyond-card">
       <div class="beyond-accent" style="background:#f97316"></div>
-      <div class="beyond-icon" aria-hidden="true">🏀</div>
+      <div class="beyond-icon" aria-hidden="true"></div>
       <div class="beyond-title" data-i18n="bball_title">Basketball</div>
       <p class="beyond-body" data-i18n="bball_body">I play basketball at a competitive level — <strong>fast decisions under pressure</strong>, reading teammates, adapting strategy mid-play. The same mental model applies to sprint planning, debugging under deadlines and agile pivots. The court trained me to think fast and communicate clearly. <br><br>Sport builds the resilience to push through hard problems without giving up.</p>
       <a class="beyond-link" href="https://go-champs.com/Account/Profile/bernardofens" target="_blank" rel="noopener" data-i18n="bball_link">View profile on Go-Champs ↗</a>
     </div>
     <div class="beyond-card">
       <div class="beyond-accent" style="background:#a78bfa"></div>
-      <div class="beyond-icon" aria-hidden="true">🎹</div>
+      <div class="beyond-icon" aria-hidden="true"></div>
       <div class="beyond-title" data-i18n="piano_title">Piano</div>
       <p class="beyond-body" data-i18n="piano_body">I play piano at an advanced level. Music is the discipline of <strong>precision, pattern recognition and structured creativity</strong> — the same skills that make elegant code. Reading a complex score trains the ability to hold multiple systems in mind simultaneously. <br><br>It also explains why I composed all original music for <strong>Shiro.</strong> — because good products have a coherent voice, whether that's sound design or API architecture.</p>
     </div>
@@ -370,10 +397,10 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
           <h3 class="project-name" id="clairfy-title">Clairfy</h3>
           <p class="project-tagline" data-i18n="clairfy_tagline">Medical consultations are full of jargon. Patients leave confused and lose important information. Clairfy solves this by generating instant, clear summaries for both doctors and patients — from audio.</p>
 
-          <button class="process-toggle" onclick="toggleProcess(this)" aria-expanded="false">
+          <button class="process-toggle open" onclick="toggleProcess(this)" aria-expanded="false">
             <span class="arrow">›</span> <span data-i18n="process_label">Process & methodology</span>
           </button>
-          <div class="process-body">
+          <div class="process-body open">
             <div class="process-step">
               <div class="process-step-label" data-i18n="proc_problem">Problem</div>
               <div class="process-step-text" data-i18n="clairfy_problem">Doctors speak in medical language. Patients forget 40–80% of what they're told. No existing app focused on the consultation itself — only on post-visit records.</div>
@@ -424,10 +451,10 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
           <h3 class="project-name" id="ziner-title">Ziner</h3>
           <p class="project-tagline" data-i18n="ziner_tagline">Creating zines requires complex desktop tools or a lot of manual work. Ziner makes it possible on iPhone — full 8-page editor, PDF export ready for printing, right in your pocket.</p>
 
-          <button class="process-toggle" onclick="toggleProcess(this)" aria-expanded="false">
+          <button class="process-toggle open" onclick="toggleProcess(this)" aria-expanded="false">
             <span class="arrow">›</span> <span data-i18n="process_label">Process & methodology</span>
           </button>
-          <div class="process-body">
+          <div class="process-body open">
             <div class="process-step">
               <div class="process-step-label" data-i18n="proc_problem">Problem</div>
               <div class="process-step-text" data-i18n="ziner_problem">No dedicated mobile app exists for the zine format. The format has strict constraints (8-page folding) that no general design tool respects.</div>
@@ -474,12 +501,12 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
             <span class="project-year">2025</span>
           </div>
           <h3 class="project-name" id="shiro-title">Shiro.</h3>
-          <p class="project-tagline" data-i18n="shiro_tagline">A solo creative challenge: build a complete game — code, pixel art, and original music — from scratch. Result: a vertical climbing game with a retro Game Boy aesthetic and Game Center leaderboards.</p>
+          <p class="project-tagline" data-i18n="shiro_tagline">A collaborative game project: build a complete game — code, pixel art, and original music — from scratch. Result: a vertical climbing game with a retro Game Boy aesthetic and Game Center leaderboards.</p>
 
-          <button class="process-toggle" onclick="toggleProcess(this)" aria-expanded="false">
+          <button class="process-toggle open" onclick="toggleProcess(this)" aria-expanded="false">
             <span class="arrow">›</span> <span data-i18n="process_label">Process & methodology</span>
           </button>
-          <div class="process-body">
+          <div class="process-body open">
             <div class="process-step">
               <div class="process-step-label" data-i18n="proc_problem">Challenge</div>
               <div class="process-step-text" data-i18n="shiro_problem">Build a complete game experience solo — including all creative assets — that feels cohesive and is fun to play. Prove end-to-end product ownership.</div>
@@ -490,7 +517,7 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
             </div>
             <div class="process-step">
               <div class="process-step-label" data-i18n="proc_role">My role</div>
-              <div class="process-step-text" data-i18n="shiro_role">100% solo — game design, Swift/SpriteKit development, all pixel art, original music composition, QA, App Store submission.</div>
+              <div class="process-step-text" data-i18n="shiro_role">Worked in a team — game design, Swift/SpriteKit development, all pixel art, original music composition, QA, App Store submission.</div>
             </div>
             <div class="process-step">
               <div class="process-step-label" data-i18n="proc_result">Result</div>
@@ -527,6 +554,32 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
           </div>
           <h3 class="project-name" id="zenith-title">Zenith</h3>
           <p class="project-tagline" data-i18n="zenith_tagline">A top-down pixel art game with wave-based enemy progression. Building on everything learned with Shiro. — more complex game loop, richer pixel art, deeper mechanics. App Store launch coming soon.</p>
+          
+          <button class="process-toggle open">
+            <span class="arrow">›</span> Process & technologies
+          </button>
+          
+          <div class="process-body open">
+            <div class="process-step">
+              <div class="process-step-label">Concept</div>
+              <div class="process-step-text">
+                Evolution of Shiro. — focusing on deeper mechanics, combat systems and player progression.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-label">Tech</div>
+              <div class="process-step-text">
+                Built with <strong>Swift + SpriteKit</strong>, custom enemy AI logic, wave system and performance optimizations for smooth gameplay.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-label">Focus</div>
+              <div class="process-step-text">
+                Stronger game feel, better feedback loops and more polished pixel art direction.
+              </div>
+            </div>
+          </div>
+          
           <div class="project-tags">
             <span class="project-tag">Swift</span>
             <span class="project-tag">SpriteKit</span>
@@ -553,11 +606,15 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
             <span class="project-year">2023</span>
           </div>
           <h3 class="project-name" id="purrchase-title">Purrchase</h3>
-          <p class="project-tagline" data-i18n="purrchase_tagline">My first iOS app — a playful shopping assistant built to learn UIKit fundamentals. Not on the App Store, but the foundation that led to everything else.</p>
-          <button class="process-toggle" onclick="toggleProcess(this)" aria-expanded="false">
+          <p class="project-tagline">
+            My first iOS app — built to deeply understand UIKit and Apple's design patterns.
+            Even though it's an academic project, it represents the foundation of my entire iOS journey.
+            From layout systems to architecture decisions, this project shaped how I build apps today.
+          </p>
+          <button class="process-toggle open" onclick="toggleProcess(this)" aria-expanded="false">
             <span class="arrow">›</span> <span data-i18n="process_label">Process & methodology</span>
           </button>
-          <div class="process-body">
+          <div class="process-body open">
             <div class="process-step">
               <div class="process-step-label" data-i18n="proc_role">Learning goals</div>
               <div class="process-step-text" data-i18n="purrchase_role">Mastered UIKit layout system, Auto Layout, delegation pattern, MVC architecture, and the iOS development workflow from Xcode to TestFlight — before SwiftUI existed in the Academy curriculum.</div>
@@ -649,23 +706,23 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
   </div>
   <div class="awards-grid reveal">
     <div class="award">
-      <div class="award-icon" aria-hidden="true">🏆</div>
+      <div class="award-icon" aria-hidden="true"></div>
       <div class="award-name" data-i18n="award1_name">Startup Garage — Top 10 Finalist</div>
       <p class="award-desc" data-i18n="award1_desc">Selected among the top 10 startups from all competing teams. Pitched Clairfy in the final round to investors, mentors and healthcare experts at PUCRS.</p>
     </div>
     <div class="award">
-      <div class="award-icon" aria-hidden="true">🎙️</div>
+      <div class="award-icon" aria-hidden="true"></div>
       <div class="award-name" data-i18n="award2_name">BioHub / Tecnopuc Podcast</div>
       <p class="award-desc" data-i18n="award2_desc">Invited to present Clairfy covering product vision, clinical impact and technical architecture to a wide tech and health audience.</p>
       <a class="award-link" href="https://www.youtube.com/watch?v=reNIX0ADKS8&t=71s" target="_blank" rel="noopener" data-i18n="award2_link">Watch on YouTube ↗</a>
     </div>
     <div class="award">
-      <div class="award-icon" aria-hidden="true">🍎</div>
+      <div class="award-icon" aria-hidden="true"></div>
       <div class="award-name" data-i18n="award3_name">Apple Developer Academy — 2 Years</div>
       <p class="award-desc" data-i18n="award3_desc">Accepted and re-evaluated each year across multiple challenge cycles at one of Apple's official global developer training programs.</p>
     </div>
     <div class="award">
-      <div class="award-icon" aria-hidden="true">📱</div>
+      <div class="award-icon" aria-hidden="true"></div>
       <div class="award-name" data-i18n="award4_name">3 Apps on the App Store</div>
       <p class="award-desc" data-i18n="award4_desc">Clairfy, Ziner and Shiro. — three production apps with real users and international distribution, shipped while still a student.</p>
     </div>
@@ -682,7 +739,12 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
     <a href="https://github.com/bernardofens" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
   </div>
   <div class="resume-row reveal">
-    <a class="resume-btn" href="" download="Bernardo_Fensterseifer_Curriculo_PT.pdf" data-i18n="resume_pt">↓ Currículo (PT)</a>
+    <a class="resume-btn" href="/resume-ptbr.pdf" download>
+      ↓ Currículo (PT-BR)
+    </a>
+    <a class="resume-btn" href="/resume-eng.pdf" download>
+      ↓ Resume (EN)
+    </a>
   </div>
   <div class="contact-info reveal">
     <div class="ci"><span class="ci-label">Email</span><span class="ci-value"><a href="mailto:bernardogarciafen@gmail.com">bernardogarciafen@gmail.com</a></span></div>
@@ -948,6 +1010,22 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 window.addEventListener('DOMContentLoaded', () => {
   setLang(detectLang());
 });
+</script>
+<script>
+    const avatars = [
+      "/Assets/profileImages/face1.png",
+      "/Assets/profileImages/face2.png",
+      "/Assets/profileImages/face3.png",
+      "/Assets/profileImages/face4.png"
+    ];
+    
+    let currentAvatar = 0;
+    const avatarEl = document.getElementById("avatar");
+    
+    setInterval(() => {
+      currentAvatar = (currentAvatar + 1) % avatars.length;
+      avatarEl.src = avatars[currentAvatar];
+    }, 2000); // troca a cada 2s
 </script>
 </body>
 </html>
