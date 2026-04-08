@@ -1,79 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Bernardo Fensterseifer — iOS Developer, Porto Alegre">
-    <title>Bernardo Fensterseifer</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Bernardo Fensterseifer — iOS Developer, Porto Alegre">
+<title>Bernardo Fensterseifer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="safe-area-inset">
-        <nav>
-            <div class="profile-carousel" id="profileCarousel">
-                </div>
-            <div class="intro">
-                <h1 class="font-heading">Bernardo Fensterseifer</h1>
-                <p class="font-body">Desenvolvedor iOS focado em interfaces fluidas e arquitetura limpa.</p>
-            </div>
-        </nav>
-    </header>
+<div class="container">
+  <nav class="lang-nav">
+    <button class="lang-btn" data-l="pt" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" data-l="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-l="ja" onclick="setLang('ja')">JP</button>
+  </nav>
 
-    <main>
-        <section id="about">
-            <h2 class="font-heading">Sobre</h2>
-            <p class="font-body">Breve resumo profissional sem distrações visuais desnecessárias.</p>
-        </section>
+  <header class="header">
+    <div class="profile-container">
+      <img id="profile-avatar" src="profileImages/profile1.png" alt="Bernardo" class="profile-img">
+    </div>
+    <h1 data-t="name">Bernardo Fensterseifer</h1>
+    <p class="subtitle" data-t="role">iOS Developer</p>
+    <div class="location">
+        <span data-t="location">Porto Alegre, Brasil</span>
+    </div>
+  </header>
 
-        <section id="process-tech" class="accordion-section">
-            <h2 class="font-heading">Process & Technologies</h2>
-            <div class="accordion-content open" id="techContent">
-                <ul class="tech-list font-body">
-                    <li>Swift & SwiftUI</li>
-                    <li>UIKit</li>
-                    <li>Design Patterns</li>
-                </ul>
-            </div>
-        </section>
+  <nav class="filters">
+    <button class="filter-btn active" data-filter="all" data-t="all" onclick="filterProjects('all')">Todos</button>
+    <button class="filter-btn" data-filter="ios" data-t="ios" onclick="filterProjects('ios')">iOS</button>
+    <button class="filter-btn" data-filter="design" data-t="design" onclick="filterProjects('design')">Design</button>
+  </nav>
 
-        <section id="projects">
-            <h2 class="font-heading">Projetos</h2>
-            <div class="project-grid">
-                <article class="project-card">
-                    <img src="images/shiro-cover.png" alt="Shiro Project">
-                    <h3 class="font-heading">Shiro.</h3>
-                    <p class="font-body">Projeto desenvolvido em colaboração por um grupo de desenvolvedores, focado em...</p>
-                </article>
-
-                <article class="project-card">
-                    <img src="images/purrchase-cover.png" alt="Purrchase">
-                    <h3 class="font-heading">Purrchase</h3>
-                </article>
-
-                <article class="project-card">
-                    <img src="images/zenith-cover.png" alt="Zenith">
-                    <h3 class="font-heading">Zenith</h3>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <footer class="info-footer" style="background-image: url('images/bottom.png');">
-        <div class="footer-overlay">
-            <h2 class="font-heading">Contato</h2>
-            <p class="font-body">Porto Alegre, RS | Disponível para novos desafios.</p>
-            <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-            </div>
+  <section class="process-section">
+    <button class="process-toggle open" onclick="toggleProcess(this)" aria-expanded="true">
+      <span data-t="process_title">Process & Technologies</span>
+      <span class="icon">↓</span>
+    </button>
+    <div class="process-content open">
+      <div class="tech-grid">
+        <div class="tech-category">
+          <h3 data-t="tech_ios">iOS Development</h3>
+          <ul>
+            <li>Swift, SwiftUI, UIKit</li>
+            <li>Combine, SwiftData</li>
+            <li>MVVM, Clean Architecture</li>
+          </ul>
         </div>
-    </footer>
+        <div class="tech-category">
+          <h3 data-t="tech_design">Product Design</h3>
+          <ul>
+            <li>Figma, Human Interface Guidelines</li>
+            <li>Prototyping, Design Systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <main class="project-grid">
+    <div class="project-card" data-category="ios">
+      <img src="images/shiro.png" alt="Shiro">
+      <div class="project-info">
+        <h3>Shiro.</h3>
+        <p data-t="shiro_desc">Projeto desenvolvido em equipe focado em acessibilidade e minimalismo.</p>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="ios">
+      <img src="images/purrchase.png" alt="Purrchase">
+      <div class="project-info">
+        <h3>Purrchase</h3>
+        <p data-t="purrchase_desc">Controle de gastos pet para usuários de iOS.</p>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="design">
+      <img src="images/zenith.png" alt="Zenith">
+      <div class="project-info">
+        <h3>Zenith</h3>
+        <p data-t="zenith_desc">Estudo de interface para exploração de dados espaciais.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-bottom">
+    <div class="footer-content">
+      <p data-t="footer_text">© 2024 Bernardo Fensterseifer</p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
