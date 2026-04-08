@@ -1,99 +1,453 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Bernardo Fensterseifer — iOS Developer, Porto Alegre">
-<title>Bernardo Fensterseifer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Bernardo Fensterseifer — iOS Developer, Porto Alegre">
+  <title>Bernardo Fensterseifer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IM+Fell+English:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <nav class="lang-nav">
-    <button class="lang-btn" data-l="pt" onclick="setLang('pt')">PT</button>
-    <button class="lang-btn" data-l="en" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" data-l="ja" onclick="setLang('ja')">JP</button>
+  <a class="skip-link" href="#main" data-i18n="skip">Pular para o conteúdo</a>
+
+  <!-- NAV -->
+  <nav role="navigation" aria-label="Navegação principal">
+    <a class="nav-logo" href="#" aria-label="Bernardo Fensterseifer">bernardo.dev</a>
+    <div class="nav-right">
+      <ul class="nav-links" role="list">
+        <li><a href="#about"      data-i18n="nav_about">Sobre</a></li>
+        <li><a href="#projects"   data-i18n="nav_projects">Projetos</a></li>
+        <li><a href="#experience" data-i18n="nav_experience">Experiência</a></li>
+        <li><a href="#contact"    data-i18n="nav_contact">Contato</a></li>
+      </ul>
+      <div class="lang-switcher" aria-label="Idioma">
+        <button class="lang-btn" onclick="setLang('pt')" data-l="pt">PT</button>
+        <button class="lang-btn" onclick="setLang('en')" data-l="en">EN</button>
+        <button class="lang-btn" onclick="setLang('ja')" data-l="ja">JA</button>
+      </div>
+    </div>
   </nav>
 
-  <header class="header">
-    <div class="profile-container">
-      <img id="profile-avatar" src="profileImages/profile1.png" alt="Bernardo" class="profile-img">
-    </div>
-    <h1 data-t="name">Bernardo Fensterseifer</h1>
-    <p class="subtitle" data-t="role">iOS Developer</p>
-    <div class="location">
-        <span data-t="location">Porto Alegre, Brasil</span>
-    </div>
-  </header>
+  <main id="main">
 
-  <nav class="filters">
-    <button class="filter-btn active" data-filter="all" data-t="all" onclick="filterProjects('all')">Todos</button>
-    <button class="filter-btn" data-filter="ios" data-t="ios" onclick="filterProjects('ios')">iOS</button>
-    <button class="filter-btn" data-filter="design" data-t="design" onclick="filterProjects('design')">Design</button>
-  </nav>
-
-  <section class="process-section">
-    <button class="process-toggle open" onclick="toggleProcess(this)" aria-expanded="true">
-      <span data-t="process_title">Process & Technologies</span>
-      <span class="icon">↓</span>
-    </button>
-    <div class="process-content open">
-      <div class="tech-grid">
-        <div class="tech-category">
-          <h3 data-t="tech_ios">iOS Development</h3>
-          <ul>
-            <li>Swift, SwiftUI, UIKit</li>
-            <li>Combine, SwiftData</li>
-            <li>MVVM, Clean Architecture</li>
-          </ul>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-left">
+        <p class="hero-eyebrow" data-i18n="hero_eyebrow">iOS Developer · Porto Alegre, Brasil</p>
+        <h1 data-i18n="hero_h1">Bernardo<br><em>Fensterseifer</em></h1>
+        <p class="hero-desc" data-i18n="hero_desc">Construo apps nativos Apple — do iPhone ao Vision Pro. Três apps na App Store. Dois anos na Apple Developer Academy. Top 10 no Startup Garage. Não só escrevo código — resolvo problemas com visão de produto.</p>
+        <div class="hero-pills">
+          <span class="pill accent" data-i18n="pill_finalist">Startup Garage Top 10</span>
+          <span class="pill" data-i18n="pill_apps">3 Apps na App Store</span>
+          <span class="pill">Swift · SwiftUI · UIKit</span>
+          <span class="pill" data-i18n="pill_apple">Ecossistema Apple</span>
+          <span class="pill" data-i18n="pill_eng">Inglês Fluente</span>
         </div>
-        <div class="tech-category">
-          <h3 data-t="tech_design">Product Design</h3>
-          <ul>
-            <li>Figma, Human Interface Guidelines</li>
-            <li>Prototyping, Design Systems</li>
-          </ul>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary" data-i18n="cta_work">Ver projetos</a>
+          <a href="#contact"  class="btn btn-ghost"   data-i18n="cta_contact">Entrar em contato</a>
+          <a href="https://github.com/bernardofens" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <main class="project-grid">
-    <div class="project-card" data-category="ios">
-      <img src="images/shiro.png" alt="Shiro">
-      <div class="project-info">
-        <h3>Shiro.</h3>
-        <p data-t="shiro_desc">Projeto desenvolvido em equipe focado em acessibilidade e minimalismo.</p>
+      <div class="hero-avatar" aria-hidden="true">
+        <div class="carousel-track">
+          <img src="Assets/profileImages/face1.png" alt="" class="carousel-img active" loading="eager">
+          <img src="Assets/profileImages/face2.png" alt="" class="carousel-img" loading="lazy">
+          <img src="Assets/profileImages/face3.png" alt="" class="carousel-img" loading="lazy">
+          <img src="Assets/profileImages/face4.png" alt="" class="carousel-img" loading="lazy">
+        </div>
+        <div class="carousel-dots" aria-hidden="true">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span data-i18n="scroll">Rolar</span>
       </div>
     </div>
 
-    <div class="project-card" data-category="ios">
-      <img src="images/purrchase.png" alt="Purrchase">
-      <div class="project-info">
-        <h3>Purrchase</h3>
-        <p data-t="purrchase_desc">Controle de gastos pet para usuários de iOS.</p>
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="about_eyebrow">01 — Sobre</span>
       </div>
-    </div>
+      <h2 class="section-title reveal" id="about-title" data-i18n="about_title">Desenvolvedor.<br><em>Criativo. Atleta.</em></h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p data-i18n="about_p1"><strong>Estudante de Ciência da Computação na PUCRS</strong> e desenvolvedor iOS na Apple Developer Academy — construindo produtos reais no ecossistema Apple há mais de dois anos.</p>
+          <p data-i18n="about_p2">Atuo em todo o ciclo de produto: da descoberta do problema e UX no <strong>Figma</strong>, ao código Swift, QA, testes beta no TestFlight e publicação na App Store. Três apps entregues com usuários reais.</p>
+          <p data-i18n="about_p3">Trabalhei em <strong>times SCRUM</strong> desde o início — liderando sprints, fazendo code reviews e entregando continuamente. Fiz pitches para investidores, participei de podcasts e cheguei ao <strong>Top 10 no Startup Garage</strong>.</p>
+          <p data-i18n="about_p4">Além da tecnologia: jogo basquete de forma competitiva e toco piano em nível avançado. Disciplina, precisão e criatividade — tudo isso alimenta a forma como construo software.</p>
+        </div>
+        <div class="reveal">
+          <div class="stat-row">
+            <div class="stat"><div class="stat-n">3</div><div class="stat-l" data-i18n="stat_apps">Apps na App Store</div></div>
+            <div class="stat"><div class="stat-n">2+</div><div class="stat-l" data-i18n="stat_years">Anos na Apple Dev Academy</div></div>
+            <div class="stat"><div class="stat-n">Top 10</div><div class="stat-l" data-i18n="stat_startup">Finalista Startup Garage</div></div>
+            <div class="stat"><div class="stat-n">5</div><div class="stat-l" data-i18n="stat_platforms">Plataformas Apple</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="project-card" data-category="design">
-      <img src="images/zenith.png" alt="Zenith">
-      <div class="project-info">
-        <h3>Zenith</h3>
-        <p data-t="zenith_desc">Estudo de interface para exploração de dados espaciais.</p>
+    <!-- BEYOND CODE -->
+    <section class="section-no-top" aria-labelledby="beyond-title">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="beyond_eyebrow">02 — Além do Código</span>
       </div>
-    </div>
+      <h2 class="section-title reveal" id="beyond-title" data-i18n="beyond_title">O que me torna<br><em>um desenvolvedor melhor</em></h2>
+      <div class="beyond-grid reveal">
+        <div class="beyond-card">
+          <div class="beyond-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93 19.07 19.07"/><path d="M7.5 3.5C8.5 5 8 7 6.5 8s-3 .5-3.5 2"/><path d="M16.5 3.5C15.5 5 16 7 17.5 8s3 .5 3.5 2"/><path d="M7.5 20.5C8.5 19 8 17 6.5 16s-3-.5-3.5-2"/><path d="M16.5 20.5C15.5 19 16 17 17.5 16s3-.5 3.5-2"/></svg>
+          </div>
+          <div class="beyond-title" data-i18n="bball_title">Basquete</div>
+          <p class="beyond-body" data-i18n="bball_body">Jogo basquete de forma competitiva — <strong>decisões rápidas sob pressão</strong>, leitura de time, adaptação de estratégia no meio do jogo. O mesmo modelo mental se aplica ao planejamento de sprints, debugging sob deadline e pivôs ágeis. O esporte constrói a resiliência para enfrentar problemas difíceis sem desistir.</p>
+          <a class="beyond-link" href="https://go-champs.com/Account/Profile/bernardofens" target="_blank" rel="noopener" data-i18n="bball_link">
+            Ver perfil no Go-Champs
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <div class="beyond-card">
+          <div class="beyond-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <div class="beyond-title" data-i18n="piano_title">Piano</div>
+          <p class="beyond-body" data-i18n="piano_body">Toco piano em nível avançado. Música é a disciplina da <strong>precisão, reconhecimento de padrões e criatividade estruturada</strong> — as mesmas habilidades que fazem código elegante. Ler uma partitura complexa treina a capacidade de manter múltiplos sistemas em mente simultaneamente. Isso também explica a trilha sonora original desenvolvida no projeto <strong>Shiro.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section-no-top" aria-labelledby="skills-title">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="skills_eyebrow">03 — Tecnologias</span>
+      </div>
+      <h2 class="section-title reveal" id="skills-title" data-i18n="skills_title">Stack &amp;<br><em>Ferramentas</em></h2>
+      <div class="skills-grid reveal">
+        <div class="skill-block">
+          <div class="skill-block-title" data-i18n="skill_apple">Ecossistema Apple</div>
+          <ul class="skill-list" role="list">
+            <li>Swift · SwiftUI</li><li>UIKit · SpriteKit</li><li>PDFKit · Game Center</li><li>XCTest · TestFlight</li><li>App Store Connect · Xcode</li>
+          </ul>
+        </div>
+        <div class="skill-block">
+          <div class="skill-block-title" data-i18n="skill_platforms">Plataformas</div>
+          <ul class="skill-list" role="list">
+            <li>iOS · iPadOS</li><li>macOS</li><li>watchOS</li><li>visionOS</li>
+          </ul>
+        </div>
+        <div class="skill-block">
+          <div class="skill-block-title" data-i18n="skill_design">Design &amp; Web</div>
+          <ul class="skill-list" role="list">
+            <li>Figma · UX/UI</li><li>Apple HIG</li><li>Pixel Art</li><li>HTML · CSS</li>
+          </ul>
+        </div>
+        <div class="skill-block">
+          <div class="skill-block-title" data-i18n="skill_process">Processo</div>
+          <ul class="skill-list" role="list">
+            <li>SCRUM · Agile · CBL</li><li>QA · Beta Testing</li><li>Git · GitHub</li><li>Product Pitching</li><li>Java</li>
+          </ul>
+        </div>
+        <div class="skill-block">
+          <div class="skill-block-title" data-i18n="skill_lang">Idiomas</div>
+          <ul class="skill-list" role="list">
+            <li data-i18n="lang_pt">Português — Nativo</li><li data-i18n="lang_en">Inglês — Fluente</li><li data-i18n="lang_ja">Japonês — Básico</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="proj_eyebrow">04 — Projetos</span>
+      </div>
+      <h2 class="section-title reveal" id="projects-title" data-i18n="proj_title">Coisas que<br><em>entreguei</em></h2>
+      <div class="filter-bar reveal" role="group" aria-label="Filtrar projetos">
+        <button class="filter-btn active" data-filter="all"      onclick="filterProjects('all')"      data-i18n="filter_all">Todos</button>
+        <button class="filter-btn"        data-filter="app"      onclick="filterProjects('app')"      data-i18n="filter_apps">iOS Apps</button>
+        <button class="filter-btn"        data-filter="game"     onclick="filterProjects('game')"     data-i18n="filter_games">Games</button>
+        <button class="filter-btn"        data-filter="academic" onclick="filterProjects('academic')" data-i18n="filter_academic">Acadêmico</button>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+
+        <!-- CLAIRFY -->
+        <article class="project-card accent-clairfy" data-category="app" aria-labelledby="clairfy-title">
+          <div class="project-img">
+            <img src="Assets/portfolioImages/clairfy.jpg" alt="Clairfy — resumo de consulta médica" loading="lazy">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-cat" style="color:var(--clairfy)" data-i18n="cat_health">Saúde · iOS</span>
+              <span class="project-year">2025</span>
+            </div>
+            <h3 class="project-name" id="clairfy-title">Clairfy</h3>
+            <p class="project-tagline" data-i18n="clairfy_tagline">Consultas médicas são cheias de jargão. Pacientes saem confusos e perdem informações. O Clairfy gera resumos claros e instantâneos para médicos e pacientes — a partir do áudio.</p>
+            <div class="process-section open">
+              <button class="process-header" onclick="toggleProcess(this)" aria-expanded="true">
+                <svg class="process-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                <span data-i18n="process_label">Processo &amp; Tecnologias</span>
+              </button>
+              <div class="process-body">
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_problem">Problema</div><div class="process-step-text" data-i18n="clairfy_problem">Médicos falam em linguagem técnica. Pacientes esquecem 40–80% do que ouviram. Nenhum app focava na consulta em si.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_process">Processo</div><div class="process-step-text" data-i18n="clairfy_process"><strong>CBL + SCRUM</strong> — definição do desafio, entrevistas com usuários, prototipação no Figma, desenvolvimento iterativo em Swift.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_role">Meu papel</div><div class="process-step-text" data-i18n="clairfy_role">Desenvolvimento iOS (Swift/SwiftUI), design UX, QA via TestFlight, publicação na App Store e pitch — incluindo a <strong>rodada final Top 10 do Startup Garage</strong> e o podcast BioHub/Tecnopuc.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_result">Resultado</div><div class="process-step-text" data-i18n="clairfy_result">Live na App Store com distribuição internacional. Top 10 no Startup Garage. Destaque no podcast BioHub.</div></div>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Swift</span><span class="project-tag">SwiftUI</span><span class="project-tag">AVFoundation</span><span class="project-tag">App Store Connect</span><span class="project-tag">TestFlight</span><span class="project-tag">Figma</span><span class="project-tag">SCRUM</span>
+            </div>
+            <div class="project-actions">
+              <a class="app-btn" style="color:var(--clairfy);border-color:var(--clairfy);background:rgba(124,121,97,.08)" href="https://apps.apple.com/br/app/clairfy/id6747406139" target="_blank" rel="noopener" data-i18n="appstore_btn">App Store <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+              <a class="app-btn ghost-btn" href="https://www.youtube.com/watch?v=reNIX0ADKS8&t=71s" target="_blank" rel="noopener" data-i18n="podcast_btn">Podcast <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ZINER -->
+        <article class="project-card accent-ziner" data-category="app" aria-labelledby="ziner-title">
+          <div class="project-img">
+            <img src="Assets/portfolioImages/ziner.jpg" alt="Ziner — editor de zines com exportação PDF" loading="lazy">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-cat" style="color:var(--ziner)" data-i18n="cat_creative">Criatividade · iOS</span>
+              <span class="project-year">2025</span>
+            </div>
+            <h3 class="project-name" id="ziner-title">Ziner</h3>
+            <p class="project-tagline" data-i18n="ziner_tagline">Criar zines exige ferramentas de desktop complexas. O Ziner torna possível no iPhone — editor completo de 8 páginas, exportação em PDF pronto para impressão.</p>
+            <div class="process-section open">
+              <button class="process-header" onclick="toggleProcess(this)" aria-expanded="true">
+                <svg class="process-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                <span data-i18n="process_label">Processo &amp; Tecnologias</span>
+              </button>
+              <div class="process-body">
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_problem">Problema</div><div class="process-step-text" data-i18n="ziner_problem">Nenhum app mobile dedicado ao formato zine. O formato tem restrições de dobra que ferramentas genéricas não respeitam.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_process">Processo</div><div class="process-step-text" data-i18n="ziner_process"><strong>CBL</strong> — pesquisa com comunidades de zines, mapeamento de dores, UX no Figma, PDFKit e canvas SwiftUI.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_role">Meu papel</div><div class="process-step-text" data-i18n="ziner_role">Swift/SwiftUI, PDFKit, design UX seguindo HIG da Apple, QA e lançamento na App Store.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_result">Resultado</div><div class="process-step-text" data-i18n="ziner_result">Live na App Store. O único editor de zines dedicado no iOS.</div></div>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Swift</span><span class="project-tag">SwiftUI</span><span class="project-tag">PDFKit</span><span class="project-tag">UX Design</span><span class="project-tag">Figma</span>
+            </div>
+            <div class="project-actions">
+              <a class="app-btn" style="color:var(--ziner);border-color:var(--ziner);background:rgba(253,218,194,.06)" href="https://apps.apple.com/br/app/ziner/id6755310040" target="_blank" rel="noopener" data-i18n="appstore_btn">App Store <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- SHIRO -->
+        <article class="project-card accent-shiro" data-category="game" aria-labelledby="shiro-title">
+          <div class="project-img">
+            <img src="Assets/portfolioImages/shiro.jpg" alt="Shiro — jogo de escalada estética Game Boy" loading="lazy">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-cat" style="color:var(--shiro)" data-i18n="cat_game">Jogo · iOS</span>
+              <span class="project-year">2025</span>
+            </div>
+            <h3 class="project-name" id="shiro-title">Shiro.</h3>
+            <p class="project-tagline" data-i18n="shiro_tagline">Jogo de escalada vertical com estética Game Boy retrô, desenvolvido em equipe na Apple Developer Academy. Arte em pixel, trilha sonora original e integração com Game Center para placares globais.</p>
+            <div class="process-section open">
+              <button class="process-header" onclick="toggleProcess(this)" aria-expanded="true">
+                <svg class="process-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                <span data-i18n="process_label">Processo &amp; Tecnologias</span>
+              </button>
+              <div class="process-body">
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_problem">Desafio</div><div class="process-step-text" data-i18n="shiro_problem">Construir uma experiência de jogo coesa e completa — design, programação, arte e som — em equipe, dentro do ciclo de desafio da Academy.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_process">Processo</div><div class="process-step-text" data-i18n="shiro_process">Design do loop de jogo colaborativo, <strong>pixel art</strong>, composição de <strong>trilha chiptune</strong> original, física no SpriteKit, integração com Game Center.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_role">Meu papel</div><div class="process-step-text" data-i18n="shiro_role">Desenvolvimento Swift/SpriteKit, composição musical, pixel art, QA e publicação — em colaboração com a equipe.</div></div>
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_result">Resultado</div><div class="process-step-text" data-i18n="shiro_result">Live na App Store. Placares globais e locais no Game Center.</div></div>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Swift</span><span class="project-tag">SpriteKit</span><span class="project-tag">Game Center</span><span class="project-tag">Pixel Art</span><span class="project-tag">Projeto em equipe</span>
+            </div>
+            <div class="project-actions">
+              <a class="app-btn" style="color:var(--shiro);border-color:var(--shiro);background:rgba(253,127,20,.07)" href="https://apps.apple.com/br/app/shiro/id6752502968" target="_blank" rel="noopener" data-i18n="appstore_btn">App Store <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ZENITH -->
+        <article class="project-card accent-zenith" data-category="game" aria-labelledby="zenith-title">
+          <div class="project-img">
+            <img src="Assets/portfolioImages/zenith.png" alt="Zenith — jogo top-down pixel art" loading="lazy">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-cat" style="color:var(--zenith)" data-i18n="cat_game_dev">Jogo · Em Desenvolvimento</span>
+              <span class="project-year">2026</span>
+            </div>
+            <h3 class="project-name" id="zenith-title">Zenith</h3>
+            <p class="project-tagline" data-i18n="zenith_tagline">Jogo top-down em pixel art com progressão de inimigos por ondas. Mecânicas mais ricas, maior profundidade. Lançamento na App Store em breve.</p>
+            <div class="project-tags">
+              <span class="project-tag">Swift</span><span class="project-tag">SpriteKit</span><span class="project-tag">Pixel Art</span><span class="project-tag">Game Design</span>
+            </div>
+            <div class="project-actions">
+              <span class="wip-badge" data-i18n="wip_badge">Em breve na App Store</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- PURRCHASE -->
+        <article class="project-card" data-category="academic" aria-labelledby="purrchase-title">
+          <div class="project-img">
+            <img src="Assets/portfolioImages/purrchase.png" alt="Purrchase — assistente de compras iOS" loading="lazy">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-cat" style="color:var(--muted2)" data-i18n="cat_academic">Acadêmico · UIKit</span>
+              <span class="project-year">2023</span>
+            </div>
+            <h3 class="project-name" id="purrchase-title">Purrchase</h3>
+            <p class="project-tagline" data-i18n="purrchase_tagline">Primeiro app iOS — assistente de compras construído para aprender UIKit. Não está na App Store, mas foi a base para tudo que veio depois.</p>
+            <div class="process-section open">
+              <button class="process-header" onclick="toggleProcess(this)" aria-expanded="true">
+                <svg class="process-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                <span data-i18n="process_label">Processo &amp; Tecnologias</span>
+              </button>
+              <div class="process-body">
+                <div class="process-step"><div class="process-step-label" data-i18n="proc_role">Aprendizados</div><div class="process-step-text" data-i18n="purrchase_role">UIKit, Auto Layout, padrão de delegação, arquitetura MVC e fluxo completo do Xcode ao TestFlight.</div></div>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">Swift</span><span class="project-tag">UIKit</span><span class="project-tag">Auto Layout</span><span class="project-tag">MVC</span>
+            </div>
+            <div class="project-actions">
+              <a class="app-btn ghost-btn" href="https://github.com/bernardofens" target="_blank" rel="noopener">GitHub <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" aria-labelledby="exp-title">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="exp_eyebrow">05 — Experiência</span>
+      </div>
+      <h2 class="section-title reveal" id="exp-title" data-i18n="exp_title">Onde<br><em>trabalhei</em></h2>
+      <div class="exp-card reveal">
+        <div class="exp-glow"></div>
+        <div class="exp-org">Apple Developer Academy · PUCRS</div>
+        <div class="exp-role" data-i18n="exp_role">Estagiário de Desenvolvimento iOS</div>
+        <div class="exp-period" data-i18n="exp_period">Fevereiro 2023 – Presente · 2+ anos · Porto Alegre, RS</div>
+        <ul class="exp-bullets">
+          <li data-i18n="exp_b1">Desenvolvi e publiquei <strong>3 apps iOS nativos</strong> na App Store — usuários reais, distribuição internacional.</li>
+          <li data-i18n="exp_b2">Entreguei para toda a <strong>stack de plataformas Apple</strong>: iPhone, iPad, macOS, Apple Watch e Apple Vision Pro.</li>
+          <li data-i18n="exp_b3">Liderei planejamento de sprints, code reviews e entrega contínua em <strong>times SCRUM multifuncionais</strong>.</li>
+          <li data-i18n="exp_b4">Projetei UI/UX no <strong>Figma</strong>, seguindo as HIG da Apple para interfaces acessíveis e refinadas.</li>
+          <li data-i18n="exp_b5">Gerenciei QA, testes beta e releases via <strong>App Store Connect e TestFlight</strong>.</li>
+          <li data-i18n="exp_b6">Fiz pitch do Clairfy para investidores no <strong>Startup Garage — Top 10 finalista</strong>.</li>
+          <li data-i18n="exp_b7">Destaque no <strong>podcast BioHub/Tecnopuc</strong> comunicando visão de produto e arquitetura técnica.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section class="section-no-top" aria-labelledby="awards-title">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="awards_eyebrow">06 — Reconhecimento</span>
+      </div>
+      <div class="awards-grid reveal">
+        <div class="award">
+          <div class="award-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+          <div class="award-name" data-i18n="award1_name">Startup Garage — Top 10 Finalista</div>
+          <p class="award-desc" data-i18n="award1_desc">Selecionado entre as 10 melhores startups. Apresentei o Clairfy na rodada final para investidores, mentores e especialistas de saúde na PUCRS.</p>
+        </div>
+        <div class="award">
+          <div class="award-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
+          <div class="award-name" data-i18n="award2_name">BioHub / Tecnopuc Podcast</div>
+          <p class="award-desc" data-i18n="award2_desc">Convidado para apresentar o Clairfy — visão do produto, impacto clínico e arquitetura técnica.</p>
+          <a class="award-link" href="https://www.youtube.com/watch?v=reNIX0ADKS8&t=71s" target="_blank" rel="noopener" data-i18n="award2_link">Assistir no YouTube <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+        <div class="award">
+          <div class="award-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="award-name" data-i18n="award3_name">Apple Developer Academy — 2 Anos</div>
+          <p class="award-desc" data-i18n="award3_desc">Aceito e reavaliado a cada ano em múltiplos ciclos de desafios em um dos programas oficiais de treinamento da Apple.</p>
+        </div>
+        <div class="award">
+          <div class="award-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <div class="award-name" data-i18n="award4_name">3 Apps na App Store</div>
+          <p class="award-desc" data-i18n="award4_desc">Clairfy, Ziner e Shiro. — três apps de produção com usuários reais e distribuição internacional, entregues ainda como estudante.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <h2 class="section-title reveal" id="contact-title" data-i18n="contact_title">Vamos construir<br><em>algo juntos</em></h2>
+      <p class="contact-desc reveal" data-i18n="contact_desc">Aberto a oportunidades de estágio, colaborações e conversas interessantes. Baseado em Porto Alegre — trabalhando remotamente.</p>
+      <div class="contact-row reveal">
+        <a href="mailto:bernardogarciafen@gmail.com" class="btn btn-primary" data-i18n="contact_email">Enviar e-mail</a>
+        <a href="https://linkedin.com/in/bernardo-fensterseifer-22b973318" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+        <a href="https://github.com/bernardofens" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+      </div>
+      <div class="resume-row reveal">
+        <a class="resume-btn" href="Assets/resume-en.pdf" download="Bernardo_Fensterseifer_Resume_EN.pdf" data-i18n="resume_en">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume (EN)
+        </a>
+        <a class="resume-btn" href="Assets/resume-pt.pdf" download="Bernardo_Fensterseifer_Curriculo_PT.pdf" data-i18n="resume_pt">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Currículo (PT)
+        </a>
+      </div>
+      <div class="contact-info reveal">
+        <div class="ci"><span class="ci-label">Email</span><span class="ci-value"><a href="mailto:bernardogarciafen@gmail.com">bernardogarciafen@gmail.com</a></span></div>
+        <div class="ci"><span class="ci-label">Telefone</span><span class="ci-value">+55 (51) 99412-3399</span></div>
+        <div class="ci"><span class="ci-label" data-i18n="ci_location">Localização</span><span class="ci-value" data-i18n="ci_poa">Porto Alegre, RS — Brasil</span></div>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="footer-bottom">
-    <div class="footer-content">
-      <p data-t="footer_text">© 2024 Bernardo Fensterseifer</p>
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-name">Bernardo Fensterseifer</span>
+        <span class="footer-role" data-i18n="footer_role">iOS Developer · PUCRS — Ciência da Computação</span>
+      </div>
+      <div class="footer-contact">
+        <a href="mailto:bernardogarciafen@gmail.com">bernardogarciafen@gmail.com</a>
+        <span>+55 (51) 99412-3399</span>
+        <span data-i18n="ci_poa">Porto Alegre, RS — Brasil</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/bernardo-fensterseifer-22b973318" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://github.com/bernardofens" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
+        <a href="https://go-champs.com/Account/Profile/bernardofens" target="_blank" rel="noopener" aria-label="Go-Champs">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93 19.07 19.07"/></svg>
+        </a>
+      </div>
+      <p class="footer-copy" data-i18n="footer_copy">© 2025 Bernardo Garcia Fensterseifer</p>
     </div>
   </footer>
-</div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
