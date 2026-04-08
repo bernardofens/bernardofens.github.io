@@ -1,0 +1,87 @@
+:root {
+    --verde: #7C7961;
+    --rosa-pessego: #FDDAC2;
+    --bg-dark: #0c0c0e;
+    --text-color: #ede9e0;
+    --font-size-base: 18px; /* Aumento conforme solicitado */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: 'IM Fell English', serif;
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.font-heading {
+    font-family: 'Vollkorn', serif;
+    color: var(--rosa-pessego);
+    font-weight: 700;
+}
+
+/* Safe Area Adjustment */
+.safe-area-inset {
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+header {
+    text-align: center;
+    border-bottom: 1px solid var(--verde);
+    padding-bottom: 2rem;
+}
+
+/* Carrossel de Perfil Maior */
+.profile-carousel {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--verde);
+    position: relative;
+}
+
+.profile-carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.profile-carousel img.active {
+    opacity: 1;
+}
+
+/* Accordion Default State */
+.accordion-content {
+    display: none;
+}
+
+.accordion-content.open {
+    display: block;
+    padding: 1rem 0;
+}
+
+/* Footer com imagem de fundo */
+.info-footer {
+    position: relative;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 4rem;
+}
+
+.footer-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
