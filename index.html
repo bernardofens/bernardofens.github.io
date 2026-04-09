@@ -135,6 +135,11 @@ nav{top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-con
 .lang-switcher{display:flex;gap:4px;align-items:center}
 .lang-btn{font-family:var(--mono);font-size:11px;color:var(--muted);background:none;border:1px solid transparent;padding:3px 7px;border-radius:3px;cursor:pointer;transition:all .2s;letter-spacing:.05em}
 .lang-btn.active{color:var(--text);border-color:var(--border2)}
+body:not(.dark) .lang-btn.active {
+  color: #1a9db8;
+  border-color: #1a9db8;
+  background: rgba(26, 157, 184, 0.08);
+}
 .lang-btn:hover{color:var(--text)}
 @media (max-width: 700px) {
   .nav-right {
@@ -376,7 +381,7 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  nav{padding:1rem 1.25rem}
+  nav{padding:1rem 1.25rem; padding-top: max(1rem, env(safe-area-inset-top));   }
   .nav-links{display:none}
   section{padding:4rem 1.25rem}
   .hero{grid-template-columns:1fr;padding:7rem 1.25rem 4rem;gap:2rem}
@@ -414,12 +419,13 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
 nav {
   position: fixed;
   transition: transform 0.3s ease;
+  padding-top: max(1.1rem, env(safe-area-inset-top));
 }
 nav.nav-hidden {
   transform: translateY(-100%);
 }
 section, #contact {
-  scroll-margin-top: 80px; /* altura da nav */
+  scroll-margin-top: 100px; /* altura da nav */
 }
 </style>
 </head>
@@ -954,8 +960,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (target) {
       e.preventDefault();
       const navHeight = document.querySelector('nav').offsetHeight;
-      const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 10;
-      window.scrollTo({
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+        window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
       });
