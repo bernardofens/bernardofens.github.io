@@ -44,6 +44,7 @@ Acesse o site: [bernardofens.github.io](https://bernardofens.github.io)
 
 ## 📁 Estrutura de arquivos
 
+```text
 bernardofens.github.io/
 ├── index.html # Página principal (código completo)
 ├── Assets/
@@ -54,6 +55,7 @@ bernardofens.github.io/
 ├── resume-ptbr.pdf # Currículo em português
 ├── resume-eng.pdf # Resume in English
 └── README.md # Este arquivo
+```
 
 > **Nota:** o site é auto‑contido em um único arquivo `index.html` (CSS e JS internos). Para editar, basta modificar esse arquivo.
 
@@ -66,17 +68,17 @@ bernardofens.github.io/
    git clone https://github.com/bernardofens/bernardofens.github.io.git
    cd bernardofens.github.io
    
-2. **Abra o arquivo index.html no seu navegador
+2. **Abra o arquivo index.html no seu navegador**
 
 Dê um duplo clique no arquivo ou use um servidor local:
-
+```text
 bash
 npx serve .
-
-3. **Personalize
+```
+3. **Personalize**
 
 Altere textos, cores ou imagens diretamente no HTML/CSS.
-Para modificar os projetos, edite os <article class="project-card">.
+Para modificar os projetos, edite os ```<article class="project-card">```.
 As traduções ficam no objeto translations dentro da tag <script>.
 
 ---
@@ -87,7 +89,7 @@ O site detecta o idioma do navegador (pt, en, ja) e permite alternar manualmente
 Para adicionar um novo idioma:
 
 Acrescente as chaves no objeto translations dentro do JavaScript.
-Adicione um botão na <div class="lang-switcher"> com onclick="setLang('xx')".
+Adicione um botão na ```<div class="lang-switcher">``` com onclick="setLang('xx')".
 
 ---
 
@@ -120,11 +122,11 @@ Consulte o arquivo LICENSE para mais detalhes.
 ## 📬 Contato
 
 Criado por Bernardo Fensterseifer
-
+```text
 E‑mail: bernardogarciafen@gmail.com
-LinkedIn: Bernardo Fensterseifer
-GitHub: @bernardofens
-
+LinkedIn: https://www.linkedin.com/in/bernardofens
+GitHub: https://github.com/bernardofens
+```
 ---
 
 Este README foi gerado com ❤️ para o portfólio de um desenvolvedor que transforma código em soluções reais.
