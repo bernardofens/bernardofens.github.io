@@ -390,6 +390,37 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
   .contact-wrap{padding:4rem 1.25rem}
   footer{flex-direction:column;text-align:center}
 }
+/* Avatar cross-fade */
+.avatar-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.avatar-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  pointer-events: none;
+}
+.avatar-img.active {
+  opacity: 1;
+}
+/* Dynamic nav hide on scroll */
+nav {
+  position: fixed;
+  transition: transform 0.3s ease;
+}
+nav.nav-hidden {
+  transform: translateY(-100%);
+}
+section, #contact {
+  scroll-margin-top: 80px; /* altura da nav */
+}
 </style>
 </head>
 <body>
@@ -441,7 +472,10 @@ footer p{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacin
     </div>
   </div>
   <div class="hero-avatar" aria-hidden="true">
-    <img id="avatar" src="/Assets/profileImages/face1.png" alt="Bernardo pixel avatar" loading="lazy">
+    <div class="avatar-container">
+      <img id="avatar1" src="/Assets/profileImages/face1.png" alt="Bernardo pixel avatar" class="avatar-img active" loading="lazy">
+      <img id="avatar2" src="/Assets/profileImages/face2.png" alt="Bernardo pixel avatar" class="avatar-img" loading="lazy">
+    </div>
   </div>
   <div class="scroll-hint" aria-hidden="true"><span data-i18n="scroll">Scroll</span></div>
 </div>
@@ -896,6 +930,38 @@ if(!localStorage.getItem("theme")){
     toggleBtn.innerText = "Light mode";
   }
 }
+// Dynamic navigation on scroll
+let lastScrollY = window.scrollY;
+const nav = document.querySelector('nav');
+
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+  if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    // Scrolling down & not at top
+    nav.classList.add('nav-hidden');
+  } else {
+    // Scrolling up
+    nav.classList.remove('nav-hidden');
+  }
+  lastScrollY = currentScrollY;
+});
+// Smooth scroll with offset for fixed header
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === "#" || href === "") return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      const navHeight = document.querySelector('nav').offsetHeight;
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 10;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
 // ── I18N ──
 const translations = {
   pt: {
@@ -1148,20 +1214,34 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script>
-    const avatars = [
-      "/Assets/profileImages/face1.png",
-      "/Assets/profileImages/face2.png",
-      "/Assets/profileImages/face3.png",
-      "/Assets/profileImages/face4.png"
-    ];
-    
-    let currentAvatar = 0;
-    const avatarEl = document.getElementById("avatar");
-    
-    setInterval(() => {
-      currentAvatar = (currentAvatar + 1) % avatars.length;
-      avatarEl.src = avatars[currentAvatar];
-    }, 2000); // troca a cada 2s
+   // Smooth avatar crossfade
+  const avatars = [
+    "/Assets/profileImages/face1.png",
+    "/Assets/profileImages/face2.png",
+    "/Assets/profileImages/face3.png",
+    "/Assets/profileImages/face4.png"
+  ];
+  let currentAvatar = 0;
+  const img1 = document.getElementById("avatar1");
+  const img2 = document.getElementById("avatar2");
+  let activeImg = img1;
+  let inactiveImg = img2;
+
+  // Preload all images
+  avatars.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+
+  setInterval(() => {
+    currentAvatar = (currentAvatar + 1) % avatars.length;
+    // Update the inactive image source then swap active class
+    inactiveImg.src = avatars[currentAvatar];
+    activeImg.classList.remove('active');
+    inactiveImg.classList.add('active');
+    // Swap references
+    [activeImg, inactiveImg] = [inactiveImg, activeImg];
+  }, 2500); // um pouco mais lento para apreciar a transição
 </script>
 
 <script>
