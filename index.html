@@ -81,7 +81,10 @@ body.dark{
   border-color:#7C7961;
   color:#7C7961;
 }
-html{scroll-behavior:smooth;font-size:18px}
+html{
+  /*scroll-behavior:smooth;*/
+  font-size:18px
+}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;overflow-x:hidden}
 
 .hero-desc{
@@ -425,7 +428,7 @@ nav.nav-hidden {
   transform: translateY(-100%);
 }
 section, #contact {
-  scroll-margin-top: 0px; /* altura da nav */
+  scroll-margin-top: 80px; /* altura da nav */
 }
 </style>
 </head>
@@ -959,14 +962,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
-      const navHeight = document.querySelector('nav').offsetHeight;
+      const nav = document.querySelector('nav');
+      const navHeight = nav.offsetHeight;
+      console.log('Nav height:', navHeight); // ← ADICIONE ESTA LINHA
       const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
-        window.scrollTo({
+      console.log('Scrolling to:', targetPosition); // ← ADICIONE ESTA LINHA
+      window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
       });
     }
   });
+});
+const navHeight = nav.offsetHeight;
+requestAnimationFrame(() => {
+  const targetPosition = target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 20;
+  window.scrollTo({ top: targetPosition, behavior: 'smooth' });
 });
 // ── I18N ──
 const translations = {
